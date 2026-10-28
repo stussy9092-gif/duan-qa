@@ -132,6 +132,7 @@ img { max-width: 100%; display: block; }
 .ans th, .ans td { border: 1px solid var(--line); padding: 6px 12px; text-align: left; }
 .ans th { background: var(--paper); font-weight: 500; }
 .ans .big { font-size: 22px; font-weight: 700; color: var(--forest-2); }
+.ans .figure { width: 100%; max-width: 760px; margin-top: 12px; border: 1px solid var(--line); border-radius: 8px; }
 mark { background: var(--mark); color: inherit; border-radius: 3px; padding: 0 1px; }
 
 .no-result { display: none; text-align: center; color: var(--muted); padding: 60px 0; }
@@ -455,6 +456,9 @@ const DATA = [
   { name: "隔音", items: [
     { id: "施工-20", q: "空中花園使用時是否會產生噪音影響頂樓客戶？如何防止？",
       a: `<p>空中花園採 5 公分 PS 板及架高地板設計。</p>` },
+    { id: "施工-21", q: "住家內地坪有做隔音墊嗎？工法是什麼？",
+      a: `<p>客餐廳、廚房、臥室有做隔音墊，工法如下圖所示。</p>
+          <img class="figure" src="assets/floor-soundproof.jpg" alt="地坪隔音墊工法剖面圖：RC 樓板、結構制音墊 1cm、PC 壓置層 5cm、打底＋黏著層 4cm、拋光石英磚 1cm，完成面 +11">` },
   ]},
 ]},
 { part: "客變說明", en: "Customization", cats: [

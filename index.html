@@ -230,7 +230,7 @@ footer { text-align: center; color: var(--muted); font-size: 14px; padding: 0 24
     <h3>手機查閱</h3>
     <p>用手機相機掃描，即可在手機上查閱答客問</p>
     <svg id="qr-svg" viewBox="0 0 33 33" shape-rendering="crispEdges" aria-label="答客問網址 QR Code"></svg>
-    <div class="url">tinyurl.com/26b66znl</div>
+    <div class="url">stussy9092-gif.github.io/duan-qa</div>
     <button type="button" id="qr-close">關閉</button>
   </div>
 </div>
@@ -649,9 +649,9 @@ const io = new IntersectionObserver(entries => {
 document.querySelectorAll(".cat").forEach(c => io.observe(c));
 
 /* ===== 手機查閱 QR Code =====
-   內容為 https://tinyurl.com/26b66znl（指向 https://stussy9092-gif.github.io/duan-qa/）
+   內容為 https://stussy9092-gif.github.io/duan-qa/
    每列 29 格，以 16 進位記錄黑白，不需網路即可顯示 */
-const QR_ROWS = "1fc53c7f,1056dc41,1758a75d,17531c5d,1740325d,10472841,1fd5557f,00107600,105c1dce,158c93b6,1643f930,1d0e8788,0f5ab141,141a1af3,0bd00d8c,00372425,0c4c1a0c,13a9cf77,18742219,10ab8700,14d96bf7,00114d18,1fc4035c,10467710,1742cff8,1740cf0e,174078fe,104cdc9d,1fd162fc".split(",");
+const QR_ROWS = "1fc49e7f,104ef841,175b275d,175ca85d,175c975d,105c7941,1fd5557f,00117000,17c6fa7c,1e155f71,0e6a25a0,099b735a,18ece82c,08271371,14f531fc,093e5532,0b408aac,14148e75,10f7f4d4,161f5632,146109f7,001b931f,1fc9f35c,105ca110,175149f7,175b16af,175aed7e,104fd7aa,1fd90c9c".split(",");
 (function drawQR() {
   const n = QR_ROWS.length, pad = 2;
   let d = "";

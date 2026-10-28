@@ -138,6 +138,16 @@ mark { background: var(--mark); color: inherit; border-radius: 3px; padding: 0 1
 
 footer { text-align: center; color: var(--muted); font-size: 14px; padding: 0 24px 40px; }
 
+/* ---------- 手機查閱 QR Code ---------- */
+.qr-modal { position: fixed; inset: 0; z-index: 100; background: rgba(5,10,6,.82); display: none; align-items: center; justify-content: center; padding: 24px; }
+.qr-modal.on { display: flex; }
+.qr-card { background: var(--card); border-radius: 16px; padding: 28px 32px; text-align: center; max-width: 360px; width: 100%; }
+.qr-card h3 { font-family: var(--serif); margin: 0 0 4px; font-size: 22px; letter-spacing: .08em; }
+.qr-card p { margin: 0; color: var(--muted); font-size: 15px; }
+.qr-card svg { width: 240px; height: 240px; margin: 18px auto 14px; display: block; }
+.qr-card .url { font-weight: 500; color: var(--gold-deep); font-size: 17px; user-select: all; }
+.qr-card button { margin-top: 18px; border: 1px solid var(--line); background: var(--paper); border-radius: 18px; padding: 6px 22px; font: inherit; cursor: pointer; }
+
 /* ---------- 窄螢幕 ---------- */
 @media (max-width: 980px) {
   .layout { grid-template-columns: 1fr; gap: 0; }
@@ -158,7 +168,7 @@ footer { text-align: center; color: var(--muted); font-size: 14px; padding: 0 24
 @media print {
   @page { size: A4; margin: 16mm 14mm; }
   body { background: #fff; font-size: 11pt; line-height: 1.65; }
-  .top, .toc, .chev { display: none !important; }
+  .top, .toc, .chev, .qr-modal { display: none !important; }
   .hero { display: block; background: none; color: var(--text); min-height: 0; border-bottom: 2px solid var(--gold-deep); margin-bottom: 8mm; }
   .hero-img { display: none; }
   .hero-text { padding: 0 0 4mm; }
@@ -192,6 +202,7 @@ footer { text-align: center; color: var(--muted); font-size: 14px; padding: 0 24
   </div>
   <div class="tools">
     <button class="btn" id="btn-toggle" type="button">全部展開</button>
+    <button class="btn" id="btn-qr" type="button">手機查閱</button>
     <button class="btn" id="btn-print" type="button">列印</button>
   </div>
 </header>
@@ -213,6 +224,16 @@ footer { text-align: center; color: var(--muted); font-size: 14px; padding: 0 24
 </div>
 
 <footer>璞永敦安 答客問｜資料來源：工務設計 115.10.01 設計部修改版、預售房地買賣契約 20260904 預檢版｜業務內部使用，請勿外流</footer>
+
+<div class="qr-modal" id="qr-modal">
+  <div class="qr-card">
+    <h3>手機查閱</h3>
+    <p>用手機相機掃描，即可在手機上查閱答客問</p>
+    <svg id="qr-svg" viewBox="0 0 33 33" shape-rendering="crispEdges" aria-label="答客問網址 QR Code"></svg>
+    <div class="url">tinyurl.com/26b66znl</div>
+    <button type="button" id="qr-close">關閉</button>
+  </div>
+</div>
 
 <script>
 /* ===== 題目資料 =====
@@ -626,6 +647,25 @@ const io = new IntersectionObserver(entries => {
   });
 }, { rootMargin: "-30% 0px -60% 0px" });
 document.querySelectorAll(".cat").forEach(c => io.observe(c));
+
+/* ===== 手機查閱 QR Code =====
+   內容為 https://tinyurl.com/26b66znl（指向 https://stussy9092-gif.github.io/duan-qa/）
+   每列 29 格，以 16 進位記錄黑白，不需網路即可顯示 */
+const QR_ROWS = "1fc53c7f,1056dc41,1758a75d,17531c5d,1740325d,10472841,1fd5557f,00107600,105c1dce,158c93b6,1643f930,1d0e8788,0f5ab141,141a1af3,0bd00d8c,00372425,0c4c1a0c,13a9cf77,18742219,10ab8700,14d96bf7,00114d18,1fc4035c,10467710,1742cff8,1740cf0e,174078fe,104cdc9d,1fd162fc".split(",");
+(function drawQR() {
+  const n = QR_ROWS.length, pad = 2;
+  let d = "";
+  QR_ROWS.forEach((hex, r) => {
+    const bits = parseInt(hex, 16).toString(2).padStart(n, "0");
+    for (let c = 0; c < n; c++) if (bits[c] === "1") d += `M${c + pad},${r + pad}h1v1h-1z`;
+  });
+  document.getElementById("qr-svg").innerHTML = `<rect width="100%" height="100%" fill="#fff"/><path d="${d}" fill="#000"/>`;
+})();
+const qrModal = document.getElementById("qr-modal");
+document.getElementById("btn-qr").addEventListener("click", () => qrModal.classList.add("on"));
+document.getElementById("qr-close").addEventListener("click", () => qrModal.classList.remove("on"));
+qrModal.addEventListener("click", e => { if (e.target === qrModal) qrModal.classList.remove("on"); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") qrModal.classList.remove("on"); });
 </script>
 </body>
 </html>

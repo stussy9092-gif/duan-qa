@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>璞永敦安答客問</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700&display=swap">
+<style>
+/* 璞永敦安 答客問（建材・施工篇）— 業務內部使用
+   顏色沿用客變服務專區：墨綠底、香檳金、白字 */
+:root {
+  --ink: #050a06;
+  --forest: #13261b;
+  --forest-2: #1d3a2a;
+  --gold: #c9bc9c;
+  --gold-deep: #7d6c45;
+  --paper: #f6f4ef;
+  --card: #ffffff;
+  --text: #1c241f;
+  --muted: #5d665f;
+  --line: #e2ddd1;
+  --mark: #f3e3a8;
+  --radius: 12px;
+  --header-h: 68px;
+  --serif: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
+  --sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+[id] { scroll-margin-top: calc(var(--header-h) + 16px); }
+body {
+  margin: 0; background: var(--paper); color: var(--text);
+  font-family: var(--sans); font-size: 17px; line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+
+/* ---------- 頁首 ---------- */
+.top {
+  position: sticky; top: 0; z-index: 50; height: var(--header-h);
+  background: var(--ink); border-bottom: 1px solid rgba(201,188,156,.2);
+  display: flex; align-items: center; gap: 20px; padding: 0 24px;
+}
+.brand { display: flex; align-items: center; gap: 12px; color: var(--gold); text-decoration: none; flex-shrink: 0; }
+.brand img { height: 40px; width: auto; mix-blend-mode: screen; }
+.brand span { font-size: 14px; letter-spacing: .2em; padding-left: 12px; border-left: 1px solid rgba(201,188,156,.4); white-space: nowrap; }
+.search { flex: 1; max-width: 520px; margin-left: auto; position: relative; }
+.search input {
+  width: 100%; height: 42px; border-radius: 21px; border: 1px solid rgba(201,188,156,.35);
+  background: rgba(255,255,255,.06); color: #fff; font: inherit; font-size: 16px; padding: 0 44px 0 18px;
+}
+.search input::placeholder { color: rgba(255,255,255,.5); }
+.search input:focus { outline: none; border-color: var(--gold); background: rgba(255,255,255,.1); }
+.search kbd {
+  position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  font: 12px var(--sans); color: rgba(255,255,255,.5); border: 1px solid rgba(255,255,255,.25); border-radius: 4px; padding: 0 6px;
+}
+.tools { display: flex; gap: 8px; flex-shrink: 0; }
+.btn {
+  height: 38px; padding: 0 14px; border-radius: 19px; cursor: pointer; white-space: nowrap;
+  border: 1px solid rgba(201,188,156,.4); background: transparent; color: var(--gold); font: inherit; font-size: 14px;
+}
+.btn:hover { background: rgba(201,188,156,.12); }
+.btn[aria-pressed="true"] { background: var(--gold); color: var(--ink); }
+
+/* ---------- 封面 ---------- */
+.hero {
+  display: grid; grid-template-columns: 1.1fr .9fr; min-height: 340px;
+  background: var(--forest); color: #fff;
+}
+.hero-text { padding: 56px 56px 48px; display: flex; flex-direction: column; justify-content: center; }
+.hero-text .eyebrow { color: var(--gold); letter-spacing: .3em; font-size: 14px; }
+.hero-text h1 { font-family: var(--serif); font-weight: 700; font-size: 44px; line-height: 1.35; margin: 10px 0 14px; letter-spacing: .06em; }
+.hero-text p { margin: 0; color: rgba(255,255,255,.75); }
+.meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.meta span { border: 1px solid rgba(201,188,156,.45); color: var(--gold); border-radius: 14px; padding: 2px 12px; font-size: 14px; }
+.hero-img { background: url("assets/exterior.jpg") center 35% / cover no-repeat; }
+
+/* ---------- 版面 ---------- */
+.layout { display: grid; grid-template-columns: 250px 1fr; gap: 40px; max-width: 1280px; margin: 0 auto; padding: 36px 24px 80px; }
+.toc { position: sticky; top: calc(var(--header-h) + 20px); align-self: start; max-height: calc(100vh - var(--header-h) - 40px); overflow-y: auto; }
+.toc h3 { font-family: var(--serif); font-size: 17px; color: var(--gold-deep); margin: 18px 0 6px; letter-spacing: .1em; }
+.toc h3:first-child { margin-top: 0; }
+.toc a {
+  display: flex; justify-content: space-between; gap: 8px; padding: 5px 12px; border-radius: 8px;
+  color: var(--text); text-decoration: none; font-size: 15px; border-left: 3px solid transparent;
+}
+.toc a:hover { background: #ebe7dd; }
+.toc a.active { border-left-color: var(--gold-deep); background: #ebe7dd; font-weight: 500; }
+.toc a small { color: var(--muted); }
+.toc a.empty { opacity: .35; pointer-events: none; }
+
+.part-title {
+  font-family: var(--serif); font-size: 30px; margin: 8px 0 4px; letter-spacing: .12em;
+  display: flex; align-items: baseline; gap: 14px;
+}
+.part-title small { font-family: var(--sans); font-size: 14px; color: var(--muted); letter-spacing: 0; }
+.part + .part { margin-top: 56px; }
+.cat h2 {
+  font-size: 19px; font-weight: 700; color: var(--forest-2); margin: 30px 0 12px;
+  padding-bottom: 8px; border-bottom: 2px solid var(--line); display: flex; justify-content: space-between;
+}
+.cat h2 small { font-weight: 400; color: var(--muted); font-size: 14px; }
+
+/* ---------- 題目卡片 ---------- */
+.qa { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); margin-bottom: 10px; overflow: hidden; }
+.qa summary {
+  list-style: none; cursor: pointer; display: flex; gap: 14px; align-items: flex-start;
+  padding: 16px 20px; font-weight: 500; font-size: 18px;
+}
+.qa summary::-webkit-details-marker { display: none; }
+.qa summary:hover { background: #fbfaf7; }
+.qa .no {
+  flex-shrink: 0; min-width: 62px; text-align: center; font-size: 13px; font-weight: 500; letter-spacing: .05em;
+  color: var(--gold-deep); border: 1px solid var(--gold); border-radius: 12px; padding: 1px 8px; margin-top: 3px;
+}
+.qa .q { flex: 1; }
+.qa .chev { flex-shrink: 0; width: 22px; height: 22px; margin-top: 4px; color: var(--muted); transition: transform .2s; }
+.qa[open] .chev { transform: rotate(180deg); }
+.qa[open] summary { border-bottom: 1px dashed var(--line); }
+.ans { padding: 16px 20px 20px 96px; }
+.ans p { margin: 0 0 8px; }
+.ans p:last-child { margin-bottom: 0; }
+.ans ul, .ans ol { margin: 4px 0 10px; padding-left: 1.4em; }
+.ans .label { font-weight: 700; color: var(--forest-2); margin-top: 10px; }
+.ans .note { font-size: 15px; color: var(--muted); background: var(--paper); border-radius: 8px; padding: 8px 12px; margin-top: 10px; }
+.ans .internal { font-size: 15px; color: #7a4a12; background: #fbf1df; border-radius: 8px; padding: 8px 12px; margin-top: 10px; }
+.ans table { border-collapse: collapse; margin: 8px 0 10px; font-size: 16px; }
+.ans th, .ans td { border: 1px solid var(--line); padding: 6px 12px; text-align: left; }
+.ans th { background: var(--paper); font-weight: 500; }
+.ans .big { font-size: 22px; font-weight: 700; color: var(--forest-2); }
+mark { background: var(--mark); color: inherit; border-radius: 3px; padding: 0 1px; }
+
+.no-result { display: none; text-align: center; color: var(--muted); padding: 60px 0; }
+.hidden { display: none !important; }
+
+footer { text-align: center; color: var(--muted); font-size: 14px; padding: 0 24px 40px; }
+
+/* ---------- 窄螢幕 ---------- */
+@media (max-width: 980px) {
+  .layout { grid-template-columns: 1fr; gap: 0; }
+  .toc { display: none; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-img { min-height: 220px; }
+}
+@media (max-width: 720px) {
+  .top { padding: 0 16px; gap: 10px; }
+  .brand span, .tools .btn:not(#btn-toggle), .search kbd { display: none; }
+  .hero-text { padding: 32px 20px; }
+  .hero-text h1 { font-size: 32px; }
+  .layout { padding: 24px 16px 60px; }
+  .ans { padding: 14px 16px 18px; }
+}
+
+/* ---------- 列印 ---------- */
+@media print {
+  @page { size: A4; margin: 16mm 14mm; }
+  body { background: #fff; font-size: 11pt; line-height: 1.65; }
+  .top, .toc, .chev { display: none !important; }
+  .hero { display: block; background: none; color: var(--text); min-height: 0; border-bottom: 2px solid var(--gold-deep); margin-bottom: 8mm; }
+  .hero-img { display: none; }
+  .hero-text { padding: 0 0 4mm; }
+  .hero-text h1 { font-size: 22pt; }
+  .hero-text p { color: var(--muted); }
+  .meta span { color: var(--gold-deep); border-color: var(--gold-deep); }
+  .layout { display: block; padding: 0; max-width: none; }
+  .part + .part { break-before: page; margin-top: 0; }
+  .cat h2 { break-after: avoid; }
+  .qa { break-inside: avoid; border-radius: 0; border-width: 0 0 1px; margin: 0; }
+  .qa summary { padding: 8px 0 2px; font-size: 12pt; }
+  .qa[open] summary { border-bottom: 0; }
+  .ans { padding: 0 0 8px 76px; display: block !important; }
+  .hidden { display: block !important; }
+  .no-result { display: none !important; }
+  mark { background: none; }
+  footer { padding: 6mm 0 0; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a class="brand" href="#top">
+    <img src="assets/logo-duan.png" alt="璞永敦安">
+    <span>答客問</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="搜尋問題或答案，例如：玻璃、防水、天花高度" autocomplete="off">
+    <kbd>/</kbd>
+  </div>
+  <div class="tools">
+    <button class="btn" id="btn-toggle" type="button">全部展開</button>
+    <button class="btn" id="btn-print" type="button">列印</button>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-text">
+    <div class="eyebrow">業務銷售說明</div>
+    <h1>璞永敦安<br>答客問</h1>
+    <p>建材・施工・客變・驗屋。點選問題即可展開答案；按 <b>/</b> 可直接搜尋。</p>
+  </div>
+  <div class="hero-img" role="img" aria-label="璞永敦安外觀透視圖"></div>
+</section>
+
+<div class="layout">
+  <nav class="toc" id="toc" aria-label="分類目錄"></nav>
+  <main id="main">
+    <div class="no-result" id="no-result">找不到符合的題目，換個關鍵字試試。</div>
+  </main>
+</div>
+
+<footer>璞永敦安 答客問｜資料來源：工務設計 115.10.01 設計部修改版、預售房地買賣契約 20260904 預檢版｜業務內部使用，請勿外流</footer>
+
+<script>
+/* ===== 題目資料 =====
+   id：題號標籤，例如 建材-04
+   要改題目或答案，直接改下面的文字即可 */
+const DATA = [
+{ part: "建材篇", en: "Materials", cats: [
+  { name: "室內裝修", items: [
+    { id: "建材-01", q: "客、餐廳、走道地坪？材質？尺寸？",
+      a: `<p>約 5.4 吋（162mm）海島型企口木地板，或 80×80cm 拋光石英磚。</p>` },
+    { id: "建材-02", q: "室內木地板條數（木皮厚度）？名稱？",
+      a: `<p>昇詮－超耐磨海島型木地板。</p>` },
+    { id: "建材-03", q: "廚具上方、後方是否有貼磚？材質？尺寸？有無天花板？",
+      a: `<p>廚房牆面背牆貼磚，採國產磁磚 30×60cm，附天花板。</p>` },
+    { id: "建材-17", q: "全棟油漆採符合綠建築標章之乳膠漆，廠牌為何？特性為何？",
+      a: `<p>採符合綠建材標章之得利塗料（Dulux）或虹牌乳膠漆。</p>
+          <p>此塗料不添加甲醛及汞、鎘等重金屬，具低散發、低汙染、低臭氧等特性，對人體健康不會造成危害。</p>` },
+  ]},
+  { name: "門窗玻璃", items: [
+    { id: "建材-04", q: "玻璃材質？厚度？鋁門窗特色說明？",
+      a: `<p class="label">玻璃</p>
+          <ul>
+            <li>鋁窗玻璃：5+5mm 膠合玻璃（視風壓強度而定）</li>
+            <li>廚房通風門：6mm（灰）強化玻璃</li>
+            <li>部分公設：8mm（灰）熱硬化玻璃（視風壓強度而定）</li>
+          </ul>
+          <p class="label">單層鋁窗性能</p>
+          <table>
+            <tr><th>耐風壓</th><td>2800 Pa（每平方公尺可抵抗 280 kg，可抵抗 15～16 級風）</td></tr>
+            <tr><th>水密性</th><td>1000 Pa（符合國家標準值）</td></tr>
+            <tr><th>氣密性</th><td>2 m³/hr‧㎡</td></tr>
+            <tr><th>遮音性</th><td>可阻隔噪音 35 dB（廚房通風門除外）</td></tr>
+          </table>` },
+  ]},
+  { name: "給排水", items: [
+    { id: "建材-05", q: "冷熱水管材質？",
+      a: `<p>各戶室內冷熱水管皆採用不鏽鋼被覆管，局部搭配樹脂水管。</p>` },
+    { id: "建材-06", q: "水塔是否為雙水箱設計？",
+      a: `<p>屋頂水塔無雙水箱之設計。</p>` },
+    { id: "建材-19", q: "是否配置淨水除氯設備？",
+      a: `<ul>
+            <li>考量維護與便利性，於社區進水端（地下室水箱）設置全自動反洗過濾設備。</li>
+            <li>屋頂水箱設置活性碳除氯設備及紫外線殺菌器。</li>
+          </ul>` },
+    { id: "建材-25", q: "本棟採用加壓馬達樓層及減壓閥樓層為何？",
+      a: `<table>
+            <tr><th>加壓馬達樓層</th><td>12F～14F</td></tr>
+            <tr><th>減壓閥樓層</th><td>1F～7F</td></tr>
+          </table>` },
+    { id: "建材-26", q: "瓦斯外管費用？",
+      a: `<p>基地內由建設公司建置；基地外由住戶分攤（含警報器、瓦斯錶通信設備及緊急遮斷設備）。</p>` },
+  ]},
+  { name: "電力與緊急供電", items: [
+    { id: "建材-12", q: "斷電時的啟動方式？緊急供電可以連續使用多久？",
+      a: `<p>台電停電時，發電機會藉由電瓶起動，經 ATS（自動切換開關）供應緊急電力。</p>
+          <p class="note">發電機使用全新進口引擎。</p>` },
+    { id: "建材-13", q: "緊急供電系統提供哪些室內電源及哪些公共電源？",
+      a: `<p class="label">室內</p>
+          <p>各戶皆提供自動切換開關乙只（15AT），停電時提供客廳、主臥及廚房共三只緊急插座。</p>
+          <p class="label">公共設施</p>
+          <p>停電時供應電梯、給水、排水泵浦、車道門、安全系統、消防設備。</p>` },
+  ]},
+  { name: "弱電與保全", items: [
+    { id: "建材-07", q: "每戶最多可接幾線電話？",
+      a: `<p>原則上每戶最多可接四線電話（住戶引進線採 4 對 8 芯）。</p>` },
+    { id: "建材-08", q: "監控系統是哪一家設備廠商？特色？",
+      a: `<p>宗亞科技。採用 7 吋網路型影視對講保全語音主機，可透過網路連結手機。</p>` },
+    { id: "建材-09", q: "社區戶外安全規劃為何？",
+      a: `<ul>
+            <li>室外紅外線攝影機。</li>
+            <li>場景位移偵測：當監視器被遮蔽、移動、噴漆或焦距被移動，導致無法清楚錄下監控畫面時，系統會自動發出警報。</li>
+          </ul>` },
+  ]},
+  { name: "公設與設備", items: [
+    { id: "建材-10", q: "社區圍牆高度及材質？",
+      a: `<p>本案東側、南側與鄰房交界處，設立 2 米高之水泥圍牆。</p>` },
+    { id: "建材-11", q: "各樓層是否有設置緩降機？哪幾戶設置？設置位置為何？",
+      a: `<p>本案住戶內無設置緩降機。</p>` },
+    { id: "建材-14", q: "車道大門開關時間各需多久？開關時之保護裝置為何？",
+      a: `<p>採用德國飛梭門，開啟約 3 秒內、關閉約 5 秒內。</p>
+          <p>保護裝置為內置隱藏式安全光柵防護電眼。</p>` },
+    { id: "建材-16", q: "公共空間照明是否採用節能燈具？",
+      a: `<p>本案公共空間均採用節能燈源（例：T5、冷陰極燈、LED 等），平均壽命較一般傳統燈具長 3 倍以上。</p>` },
+    { id: "建材-18", q: "電梯有哪些防疫配備？",
+      a: `<p>車廂內配備夏普空氣清淨機。</p>` },
+    { id: "建材-20", q: "公設空間空調是否配置紫外線殺菌箱？",
+      a: `<p>1F、2F 健身房及 R1F 梯廳等室內公共區域設置空調冷氣，無加設過濾殺菌設備。</p>` },
+    { id: "建材-21", q: "本棟是否預留全熱交換機相關開孔？",
+      a: `<p>有規劃對外（外牆）的進、排氣出口（不再贈送全熱交換機）。</p>` },
+  ]},
+  { name: "空間高度", items: [
+    { id: "建材-15", q: "天花板高度？（室內、樑下、廚房、廁所、梯廳、前後陽台）",
+      a: `<p class="note">除廚房、浴室及前後陽台外，其餘高度皆為結構體面尺寸（不含粉刷約 2cm）。</p>
+          <p class="label">客餐廳及臥室</p>
+          <p><span class="big">311～314cm</span>（依版厚不同而異）</p>
+          <p>340cm（樓高）－ 15～18cm（結構版厚）－ 11cm（隔音＋壓層＋地坪飾材）</p>
+          <p class="note">未扣除室內消防灑水設備、空調室內機厚度 40cm 及明管明線厚度 10～35cm。</p>
+          <p class="label">大樑下（最低點）</p>
+          <p><span class="big">237cm</span></p>
+          <p>340cm（樓高）－ 90cm（樑深）－ 11cm（地坪）－ 2cm（樑粉刷厚）</p>
+          <p class="label">其他空間</p>
+          <table>
+            <tr><th>廚房</th><td>天花板完成面 225～230cm</td></tr>
+            <tr><th>廁所</th><td>天花板完成面 225～230cm</td></tr>
+            <tr><th>後陽台</th><td>230cm</td></tr>
+            <tr><th>梯廳</th><td>天花高度 230～270cm</td></tr>
+            <tr><th>排煙室</th><td>天花高度 230～270cm</td></tr>
+          </table>
+          <p class="note">上述高度不含明管明線所占空間；十一層（含）以上室內有消防灑水管。</p>` },
+  ]},
+  { name: "建築標章", items: [
+    { id: "建材-22", q: "本棟是否有申請綠建築標章？等級？",
+      a: `<p>有，銀級（詳報告書）。</p>` },
+    { id: "建材-23", q: "本棟是否有申請智慧建築標章？等級？",
+      a: `<p>有，銀級。</p>` },
+    { id: "建材-24", q: "本棟是否有申請耐震標章？等級？",
+      a: `<p>有。耐震標章無等級之分。</p>` },
+    { id: "建材-27", q: "本棟是否有申請無障礙標章？等級？",
+      a: `<p>本案有辦理「新建住宅性能評估之無障礙環境」，預計取得無障礙環境評估「第二級」之評估報告書。</p>` },
+  ]},
+]},
+{ part: "施工篇", en: "Construction", cats: [
+  { name: "地質與基礎", items: [
+    { id: "施工-01", q: "是什麼樣的地質？是否需要改良？哪一家鑽探？",
+      a: `<p>黏土及砂質土層，無地質改良。鑽探單位為昭宏工程顧問有限公司。</p>` },
+    { id: "施工-02", q: "地下室基礎工程如何設計與施作？筏基或版基？筏式基礎優點是什麼？",
+      a: `<p>基礎工程採<b>筏式基礎</b>。</p>
+          <p>筏式基礎是用大型基礎版，或結合地樑及地下室牆體，將建築物所有柱或牆的各種載重，傳佈到基礎底面的地層。</p>
+          <p class="label">筏式基礎的優點</p>
+          <ol>
+            <li>減少差異沉陷</li>
+            <li>防水，阻止水滲透</li>
+            <li>對荷重有補償作用</li>
+          </ol>
+          <p>因此適用於大面積、低承載、高水位的施工條件。</p>` },
+    { id: "施工-03", q: "是否有連續壁？厚度及深度？",
+      a: `<p>有。厚度 80 公分，深度 29.5M。</p>` },
+  ]},
+  { name: "結構", items: [
+    { id: "施工-04", q: "建築結構為何？",
+      a: `<p>RC 構造。</p>` },
+    { id: "施工-05", q: "耐震強度如何？",
+      a: `<p>無論承重、抗壓、耐震、防颱等，震區水平加速度係數高達 <b>0.266g</b>，震度分級屬六級烈震。</p>
+          <p class="note">台北市規定只要 0.24g，震度分級屬五級強震。</p>` },
+    { id: "施工-06", q: "樓板厚度？（詳樓板厚度分布圖）",
+      a: `<p>15～18cm。</p>` },
+    { id: "施工-07", q: "外牆材質？厚度？",
+      a: `<p>外牆為 RC 構造，厚度 15cm。</p>` },
+    { id: "施工-08", q: "樑、柱尺寸？",
+      a: `<p>詳結構圖。</p>` },
+    { id: "施工-10", q: "地下室各樓層結構體淨高度？（版下、樑下）",
+      a: `<table>
+            <tr><th>樓層</th><th>樓高</th><th>最大樑深</th><th>樑下</th><th>樓板厚</th><th>版下</th></tr>
+            <tr><td>B1F</td><td>380cm</td><td>80cm</td><td>300cm</td><td>20 / 25cm</td><td>360 / 355cm</td></tr>
+            <tr><td>B2F</td><td>310cm</td><td>60cm</td><td>250cm</td><td>20cm、無樑版 40cm</td><td>290 / 270cm</td></tr>
+            <tr><td>B3F</td><td>310cm</td><td>60cm</td><td>250cm</td><td>20cm、無樑版 40cm</td><td>290 / 270cm</td></tr>
+            <tr><td>B4F</td><td>310cm</td><td>60cm</td><td>250cm</td><td>20cm、無樑版 40cm</td><td>290 / 270cm</td></tr>
+          </table>` },
+    { id: "施工-11", q: "水泥磅數及強度？供應廠商？",
+      a: `<table>
+            <tr><th>範圍</th><th>混凝土強度</th></tr>
+            <tr><td>地下四層～地下二層樓版</td><td>350 kgf/cm²（5000 PSI）</td></tr>
+            <tr><td>地下一層～二層樓版</td><td>420 kgf/cm²（6000 PSI）</td></tr>
+            <tr><td>三樓～六樓版</td><td>350 kgf/cm²（5000 PSI）</td></tr>
+            <tr><td>其餘</td><td>280 kgf/cm²（4000 PSI）</td></tr>
+          </table>
+          <p>詳情參閱結構設計一般說明。供應廠商為力泰、大漢或同級廠商。</p>` },
+    { id: "施工-12", q: "鋼筋材質？鋼筋續接方式？供應廠商？",
+      a: `<ol>
+            <li>4 號及 4 號以上：fy＝4200 kg/cm²，採用 CNS 560 SD420 高拉鋼筋。<br>
+                3 號及 3 號以下：fy＝2800 kg/cm²，採用 CNS 560 SD280 中拉鋼筋。</li>
+            <li>柱續接、樑搭接。</li>
+            <li>國內合格鋼筋廠商：豐興、羅東、通順或同等級廠商。</li>
+          </ol>` },
+  ]},
+  { name: "室內隔間", items: [
+    { id: "施工-09", q: "室內隔間材質？厚度？特色？",
+      a: `<p>本案住戶室內全部施作輕質隔間牆，厚度 9～12cm。</p>
+          <ul>
+            <li>降低結構載重。</li>
+            <li>輕隔間多採骨架配合彈性固定，地震時有較佳的變形緩衝能力，不易發生結構性斷裂掉落。</li>
+            <li>裝修彈性較大。</li>
+          </ul>` },
+  ]},
+  { name: "防水工程", items: [
+    { id: "施工-13", q: "浴廁防漏水措施？",
+      a: `<ul>
+            <li>複層版及牆面施作樹脂砂漿防水，並於版底粉刷抓洩水坡度、設置排水口，因應浴室地坪滲水時的排水。</li>
+            <li>DECK 版部分：牆底部施作止水墩座，與牆體交接處以單液 PU 補強。</li>
+            <li>地坪及牆面施作樹脂砂漿防水，牆面防水高度與天花板齊。</li>
+          </ul>` },
+    { id: "施工-14", q: "浴室是否有降版？",
+      a: `<p>浴室有施作複層版，客戶改裝時可於當層修改管線位置。浴缸無降版施作。</p>` },
+    { id: "施工-15", q: "浴室是否有當層排水設計？",
+      a: `<p>浴室於乾區及淋浴區皆會施作地板排水。</p>` },
+    { id: "施工-16", q: "浴室是否有當層排氣設計？",
+      a: `<p>本案浴廁排氣規劃為當層排放，風機採國際牌暖風機。</p>` },
+    { id: "施工-17", q: "廚房及工作陽台防水措施？",
+      a: `<p>廚房無施作防水，有清潔口。</p>
+          <p>工作陽台因屬半戶外空間，以施作截角補強及加強排水性能為主。</p>` },
+    { id: "施工-18", q: "窗戶防漏水措施？",
+      a: `<p>一般窗外牆結構體施作洩水坡度；落地窗施作止水墩並施作截角補強。</p>
+          <p class="label">三道防水</p>
+          <ol>
+            <li>鋁窗與 RC 間以 1：3 水泥砂漿嵌縫填實。</li>
+            <li>鋁窗與 RC 間在嵌縫處施作防水層加強防水。</li>
+            <li>鋁窗與面飾材間施作填縫材，阻絕水路。</li>
+          </ol>` },
+    { id: "施工-19", q: "屋頂防漏水及隔熱工程如何施工？",
+      a: `<table>
+            <tr><th>屋頂防水</th><td>以聚脲防水，並試水 48 小時以上。</td></tr>
+            <tr><th>屋頂隔熱</th><td>於聚脲防水層與保護層之間放置 PS 板等隔熱材，降低熱源傳遞。</td></tr>
+          </table>` },
+  ]},
+  { name: "隔音", items: [
+    { id: "施工-20", q: "空中花園使用時是否會產生噪音影響頂樓客戶？如何防止？",
+      a: `<p>空中花園採 5 公分 PS 板及架高地板設計。</p>` },
+  ]},
+]},
+{ part: "客變說明", en: "Customization", cats: [
+  { name: "變更次數與範圍", items: [
+    { id: "客變-01", q: "客變可以變更幾次？",
+      a: `<p>客變以 <b>1 次</b>為限，須在公司通知的期限內辦理，並由客戶親自在工程變更單上簽認。</p>
+          <p>如需再次變更，公司會視施工情況評估是否受理；如同意辦理，會加收該次變更金額 <b>20%</b> 作為管理費（追加、追減都要計算，不以相抵後的金額計算）。</p>
+          <p class="note">收到變更單後 10 日內要完成簽認，逾期依原圖施工。變更若為追加，收到繳款通知 7 日內要繳清，否則視同取消變更；若為減帳，於交屋時無息一次結清。（合約第 12 條、附件七）</p>` },
+    { id: "客變-02", q: "客變「可以」變更的項目有哪些？",
+      a: `<p>以室內隔間及裝修為限：</p>
+          <p class="label">隔間與門</p>
+          <ul><li>臥室、廚房隔間變動，門框、門扇移位（管道間、玄關門除外）。</li></ul>
+          <p class="label">水電</p>
+          <ul>
+            <li>插座：每個居室最多增加 2 只，專用插座每戶最多 3 只。浴室不可增設 220V 插座（僅能預留空管）。</li>
+            <li>開關：一盞燈如需多處控制，最多增加 2 處開關。</li>
+            <li>網路、電話、電視出口：每個系統各最多新增 3 只。</li>
+            <li>給水配管（例如水龍頭）的增減與位置。</li>
+          </ul>
+          <p class="label">建材選定（以公司提供的樣品為範圍）</p>
+          <ul>
+            <li>海島型木地板與 80×80cm 拋光石英磚可互換，須補價差。</li>
+            <li>室內牆面油漆顏色。</li>
+            <li>浴廁磁磚規格及顏色，可整套互換，須補價差。</li>
+            <li>廚具面板及檯面顏色。</li>
+          </ul>
+          <p class="note">合約第 12 條、附件七。</p>` },
+    { id: "客變-03", q: "客變「不可以」變更的項目有哪些？",
+      a: `<ul>
+            <li>建築結構、大樓外觀立面、管道間、消防設施、公共設施。</li>
+            <li>管道間不可移動或縮小。</li>
+            <li>浴廁、廚房的給排水管線範圍不可超出原合約圖面位置（浴廁以複層版範圍為準），以免影響樓下住戶。浴廁隔間可在此範圍內調整。</li>
+            <li>外牆開口、開窗位置、窗戶形式及顏色、陽台與露台範圍。</li>
+            <li>室內配電盤及弱電箱位置。</li>
+            <li>消防灑水管路位置。</li>
+            <li>冷氣主機位置不可超出原規劃範圍。</li>
+            <li>玄關門位置。</li>
+            <li>全棟結構體完成後，不可再要求變更室內隔間。</li>
+          </ul>
+          <p class="label">其他限制</p>
+          <ul>
+            <li>變更項目如需拆除或改造已完成的工程，公司會視施工情況評估是否受理；如同意辦理，拆除及改造費用由客戶負擔。</li>
+            <li>退地坪建材：交屋以結構體完成面驗收，且須追加防水處理。</li>
+            <li>廚具為整套規劃，局部變更（爐具、水槽、櫃身加長或減短）以全套退帳計算。</li>
+            <li>交屋後自行裝修更改管線的部分，不列入保固範圍。</li>
+          </ul>
+          <p class="note">合約第 12 條、附件七。</p>` },
+  ]},
+  { name: "浴室變更", items: [
+    { id: "客變-04", q: "為什麼浴室隔間可以變更，卻不能施作防水及建材？",
+      a: `<p>目前預售屋市場，浴室隔間大多不開放變更，因為會牽涉防水、隔音墊等問題。</p>
+          <p>公司也希望住戶盡量不要變更水區，但考量仍有客戶有這個需求，所以可以協助施作隔間。不過變更後的防水、隔音責任須由住戶自行負擔，因此公司不施作浴室內的防水及建材。</p>
+          <p class="note">合約附件七：浴廁隔間若變更，浴廁內建材、設備及防水由買方自行施作；浴廁範圍不得超過原合約圖面位置。</p>` },
+  ]},
+]},
+{ part: "驗屋說明", en: "Inspection", cats: [
+  { name: "驗屋規定", items: [
+    { id: "驗屋-01", q: "為什麼要訂定驗屋說明？",
+      a: `<p>目前第三方驗屋沒有法定的驗屋標準，各家驗屋公司的標準不一。為了事先讓驗屋公司了解我們的工程標準，所以在合約中訂定驗屋說明（附件十二）。</p>` },
+    { id: "驗屋-02", q: "為什麼複驗階段不再受理「初驗時已存在但未開列」的外觀瑕疵？",
+      a: `<p>初驗是讓客戶把所有缺失一次列出的階段，複驗則是確認初驗列出的項目都已修好。如果複驗時再加入初驗就已存在的外觀小瑕疵（例如牆面微小髒污、油漆非結構性細裂、打光才看得到的紋路），修繕會一再循環、延後交屋，對雙方都不利。所以請客戶在初驗時就仔細、完整地開列。</p>
+          <p>如果是修繕過程中，工班搬運或施工造成的新損傷，公司仍會負責修繕。</p>
+          <p class="note">合約附件十二第一點第（二）項。</p>` },
+  ]},
+  { name: "驗屋標準", items: [
+    { id: "驗屋-03", q: "建材表面瑕疵不能更換嗎？為什麼要以專業美容方式處理？",
+      a: `<p>以鋁窗為例，施工過程難免會造成刮傷。但若因為刮傷就更換整樘鋁窗，防水、泥作、外側建材全部都要重做，更換過程還會損及周邊建材。</p>
+          <p>因此在不影響日常生活使用的情況下，公司會以專業美容方式處理，盡量做到與原色無異。</p>
+          <p class="note">合約附件十二：修補後如仍影響使用功能、安全或整體外觀品質，公司仍負改善責任。</p>` },
+    { id: "驗屋-04", q: "浴室及陽台地磚（含露台）工程慣例的洩水坡度是多少？",
+      a: `<p>以 <b>1/100</b> 為基準。</p>
+          <p>洩水坡度以不積水為原則，客戶不能要求變更坡度；但如果實際有排水不良、逆坡或積水的情形，公司負責改善。</p>
+          <p class="note">合約附件十二第三點第（五）項。</p>` },
+  ]},
+]},
+];
+
+/* ===== 產生畫面 ===== */
+const main = document.getElementById("main");
+const toc = document.getElementById("toc");
+const noResult = document.getElementById("no-result");
+const chev = `<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>`;
+let total = 0;
+
+DATA.forEach((part, pi) => {
+  const sec = document.createElement("section");
+  sec.className = "part";
+  sec.innerHTML = `<div class="part-title">${part.part}<small>${part.en}</small></div>`;
+  const tocHead = document.createElement("h3");
+  tocHead.textContent = part.part;
+  toc.appendChild(tocHead);
+
+  part.cats.forEach((cat, ci) => {
+    const catId = `c${pi}-${ci}`;
+    const box = document.createElement("div");
+    box.className = "cat";
+    box.id = catId;
+    box.innerHTML = `<h2>${cat.name}<small>${cat.items.length} 題</small></h2>`;
+    cat.items.forEach(it => {
+      total++;
+      const d = document.createElement("details");
+      d.className = "qa";
+      d.id = it.id;
+      d.innerHTML = `<summary><span class="no">${it.id.replace("-", " ")}</span><span class="q">${it.q}</span>${chev}</summary>
+        <div class="ans"><div class="body">${it.a}</div></div>`;
+      box.appendChild(d);
+    });
+    sec.appendChild(box);
+    const a = document.createElement("a");
+    a.href = "#" + catId;
+    a.dataset.cat = catId;
+    a.innerHTML = `${cat.name}<small>${cat.items.length}</small>`;
+    toc.appendChild(a);
+  });
+  main.insertBefore(sec, noResult);
+});
+
+/* ===== 搜尋 ===== */
+const input = document.getElementById("q");
+const allQA = [...document.querySelectorAll(".qa")];
+allQA.forEach(d => {
+  d._q = d.querySelector(".q");
+  d._body = d.querySelector(".body");
+  d._qHTML = d._q.innerHTML;
+  d._bodyHTML = d._body.innerHTML;
+});
+
+function highlight(html, kw) {
+  // 只在標籤外的文字加上標記
+  const re = new RegExp(kw.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi");
+  return html.replace(/(<[^>]+>)|([^<]+)/g, (m, tag, text) => tag ? tag : text.replace(re, s => `<mark>${s}</mark>`));
+}
+
+function runSearch() {
+  const kws = input.value.trim().split(/\s+/).filter(Boolean);
+  let shown = 0;
+  allQA.forEach(d => {
+    d._q.innerHTML = d._qHTML;
+    d._body.innerHTML = d._bodyHTML;
+    if (!kws.length) { d.classList.remove("hidden"); return; }
+    const text = (d.id + d._q.textContent + d._body.textContent).toLowerCase();
+    const hit = kws.every(k => text.includes(k.toLowerCase()));
+    d.classList.toggle("hidden", !hit);
+    if (hit) {
+      shown++;
+      d.open = true;
+      kws.forEach(k => { d._q.innerHTML = highlight(d._q.innerHTML, k); d._body.innerHTML = highlight(d._body.innerHTML, k); });
+    }
+  });
+  document.querySelectorAll(".cat").forEach(c => {
+    const any = c.querySelector(".qa:not(.hidden)");
+    c.classList.toggle("hidden", !any);
+    toc.querySelector(`[data-cat="${c.id}"]`).classList.toggle("empty", !any);
+  });
+  document.querySelectorAll(".part").forEach(p => p.classList.toggle("hidden", !p.querySelector(".cat:not(.hidden)")));
+  noResult.style.display = kws.length && !shown ? "block" : "none";
+  if (!kws.length) allQA.forEach(d => d.open = false);
+  updateToggleLabel();
+}
+input.addEventListener("input", runSearch);
+input.addEventListener("keydown", e => { if (e.key === "Escape") { input.value = ""; runSearch(); input.blur(); } });
+document.addEventListener("keydown", e => {
+  if (e.key === "/" && document.activeElement !== input) { e.preventDefault(); input.focus(); input.select(); }
+});
+
+/* ===== 全部展開 / 收合 ===== */
+const btnToggle = document.getElementById("btn-toggle");
+function updateToggleLabel() {
+  const visible = allQA.filter(d => !d.classList.contains("hidden"));
+  btnToggle.textContent = visible.length && visible.every(d => d.open) ? "全部收合" : "全部展開";
+}
+btnToggle.addEventListener("click", () => {
+  const visible = allQA.filter(d => !d.classList.contains("hidden"));
+  const openAll = !visible.every(d => d.open);
+  visible.forEach(d => d.open = openAll);
+  updateToggleLabel();
+});
+allQA.forEach(d => d.addEventListener("toggle", updateToggleLabel));
+
+/* ===== 列印：先全部展開 ===== */
+let openedBeforePrint = [];
+window.addEventListener("beforeprint", () => {
+  openedBeforePrint = allQA.map(d => d.open);
+  allQA.forEach(d => d.open = true);
+});
+window.addEventListener("afterprint", () => allQA.forEach((d, i) => d.open = openedBeforePrint[i]));
+document.getElementById("btn-print").addEventListener("click", () => window.print());
+
+/* ===== 目錄跟著捲動標示目前分類 ===== */
+const tocLinks = [...toc.querySelectorAll("a")];
+const io = new IntersectionObserver(entries => {
+  entries.forEach(en => {
+    if (en.isIntersecting) tocLinks.forEach(a => a.classList.toggle("active", a.dataset.cat === en.target.id));
+  });
+}, { rootMargin: "-30% 0px -60% 0px" });
+document.querySelectorAll(".cat").forEach(c => io.observe(c));
+</script>
+</body>
+</html>

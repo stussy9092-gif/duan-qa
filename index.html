@@ -64,6 +64,7 @@ img { max-width: 100%; display: block; }
 }
 .btn:hover { background: rgba(201,188,156,.12); }
 .btn[aria-pressed="true"] { background: var(--gold); color: var(--ink); }
+.btn .sm { display: none; }
 
 /* ---------- 封面 ---------- */
 .hero {
@@ -145,7 +146,7 @@ footer { text-align: center; color: var(--muted); font-size: 14px; padding: 0 24
 .qr-card h3 { font-family: var(--serif); margin: 0 0 4px; font-size: 22px; letter-spacing: .08em; }
 .qr-card p { margin: 0; color: var(--muted); font-size: 15px; }
 .qr-card svg { width: 240px; height: 240px; margin: 18px auto 14px; display: block; }
-.qr-card .url { font-weight: 500; color: var(--gold-deep); font-size: 17px; user-select: all; }
+.qr-card .url { font-weight: 500; color: var(--gold-deep); font-size: 15px; user-select: all; white-space: nowrap; }
 .qr-card button { margin-top: 18px; border: 1px solid var(--line); background: var(--paper); border-radius: 18px; padding: 6px 22px; font: inherit; cursor: pointer; }
 
 /* ---------- 窄螢幕 ---------- */
@@ -157,7 +158,10 @@ footer { text-align: center; color: var(--muted); font-size: 14px; padding: 0 24
 }
 @media (max-width: 720px) {
   .top { padding: 0 16px; gap: 10px; }
-  .brand span, .tools .btn:not(#btn-toggle), .search kbd { display: none; }
+  .brand span, .tools .btn:not(#btn-toggle):not(#btn-qr), .search kbd, .btn .lg { display: none; }
+  .btn .sm { display: inline; }
+  .tools { gap: 6px; }
+  .tools .btn { padding: 0 10px; }
   .hero-text { padding: 32px 20px; }
   .hero-text h1 { font-size: 32px; }
   .layout { padding: 24px 16px 60px; }
@@ -202,7 +206,7 @@ footer { text-align: center; color: var(--muted); font-size: 14px; padding: 0 24
   </div>
   <div class="tools">
     <button class="btn" id="btn-toggle" type="button">全部展開</button>
-    <button class="btn" id="btn-qr" type="button">手機查閱</button>
+    <button class="btn" id="btn-qr" type="button"><span class="lg">手機查閱</span><span class="sm">QR</span></button>
     <button class="btn" id="btn-print" type="button">列印</button>
   </div>
 </header>

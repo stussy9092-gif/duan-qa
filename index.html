@@ -134,6 +134,7 @@ img { max-width: 100%; display: block; }
 .ans .big { font-size: 22px; font-weight: 700; color: var(--forest-2); }
 .ans .figure { width: 100%; max-width: 760px; margin-top: 12px; border: 1px solid var(--line); border-radius: 8px; }
 .ans .figcap { font-size: 14px; color: var(--muted); margin-top: 4px; }
+.ans a { color: var(--gold-deep); font-weight: 500; text-underline-offset: 3px; }
 mark { background: var(--mark); color: inherit; border-radius: 3px; padding: 0 1px; }
 
 .no-result { display: none; text-align: center; color: var(--muted); padding: 60px 0; }
@@ -539,7 +540,8 @@ const DATA = [
 { part: "驗屋說明", en: "Inspection", cats: [
   { name: "驗屋規定", items: [
     { id: "驗屋-01", q: "為什麼要訂定驗屋說明？",
-      a: `<p>目前第三方驗屋沒有法定的驗屋標準，各家驗屋公司的標準不一。為了事先讓驗屋公司了解我們的工程標準，所以在合約中訂定驗屋說明（附件十二）。</p>` },
+      a: `<p>目前第三方驗屋沒有法定的驗屋標準，各家驗屋公司的標準不一。為了事先讓驗屋公司了解我們的工程標準，所以在合約中訂定驗屋說明（附件十二）。</p>
+          <p>詳細說明請參考：<a href="https://stussy9092-gif.github.io/house-contract/" target="_blank" rel="noopener">預售房屋土地買賣契約修正（驗屋標準）</a></p>` },
     { id: "驗屋-02", q: "為什麼複驗階段不再受理「初驗時已存在但未開列」的外觀瑕疵？",
       a: `<p>初驗是讓客戶把所有缺失一次列出的階段，複驗則是確認初驗列出的項目都已修好。如果複驗時再加入初驗就已存在的外觀小瑕疵（例如牆面微小髒污、油漆非結構性細裂、打光才看得到的紋路），修繕會一再循環、延後交屋，對雙方都不利。所以請客戶在初驗時就仔細、完整地開列。</p>
           <p>如果是修繕過程中，工班搬運或施工造成的新損傷，公司仍會負責修繕。</p>
